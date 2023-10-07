@@ -23,6 +23,7 @@ export default function UserProfilePage() {
   const showToast = useShowToast();
   const fileRef = useRef(null);
 
+  const [updating, setUpdating] = useState(false);
   const [inputs, setInputs] = useState({
     username: user.username,
     password: '',
@@ -37,6 +38,8 @@ export default function UserProfilePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (updating) return;
+    setUpdating(true);
     try {
       const res = await fetch(`/api/users/update/${user._id}`, {
         method: 'PUT',
@@ -56,6 +59,8 @@ export default function UserProfilePage() {
       localStorage.setItem('user-threads', JSON.stringify(data));
     } catch (error) {
       showToast('Error', 'Image size is too large', 'error');
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -170,6 +175,7 @@ export default function UserProfilePage() {
                 bg: 'green.500',
               }}
               type='submit'
+              isLoading={updating}
             >
               Submit
             </Button>
