@@ -1,4 +1,19 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import userAtom from '../atoms/userAtom';
@@ -6,10 +21,14 @@ import useShowToast from '../hooks/useShowToast';
 
 const Actions = ({ post: post_ }) => {
   const user = useRecoilValue(userAtom);
-  const [liked, setLiked] = useState(post_.likes.includes(user._id));
-  const [isLiking, setIsLiking] = useState(false);
-  const [post, setPost] = useState(post_);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const showToast = useShowToast();
+
+  const [isLiking, setIsLiking] = useState(false);
+  const [liked, setLiked] = useState(post_.likes.includes(user?._id));
+  const [post, setPost] = useState(post_);
+  const [reply, setReply] = useState('');
+  const [isReplying, setIsReplying] = useState(false);
 
   const handleLikeAndUnlike = async () => {
     if (!user) {
@@ -55,6 +74,48 @@ const Actions = ({ post: post_ }) => {
     }
   };
 
+  const handleReply = async () => {
+    if (!user) {
+      return showToast(
+        'Error',
+        'You must be logged in to reply to a post',
+        'error'
+      );
+    }
+
+    if (!reply) {
+      return showToast('Error', 'Reply cannot be empty', 'error');
+    }
+    if (isReplying) return;
+    setIsReplying(true);
+
+    try {
+      const res = await fetch(`/api/posts/reply/${post._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: reply }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        showToast('Error', data.error, 'error');
+        return;
+      }
+
+      setPost({ ...post, replies: [...post.replies, data.reply] });
+      setReply('');
+      onClose();
+      console.log(data);
+    } catch (error) {
+      showToast('Error', error.message, 'error');
+    } finally {
+      setIsReplying(false);
+    }
+  };
+
   return (
     <Flex flexDirection={'column'}>
       <Flex gap={3} my={2} onClick={(e) => e.preventDefault()}>
@@ -83,6 +144,7 @@ const Actions = ({ post: post_ }) => {
           role='img'
           viewBox='0 0 24 24'
           width='20'
+          onClick={onOpen}
         >
           <title>Comment</title>
           <path
@@ -139,6 +201,35 @@ const Actions = ({ post: post_ }) => {
           ></polygon>
         </svg>
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <Input
+                placeholder='Reply goes here...'
+                value={reply}
+                onChange={(e) => setReply(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              size={'sm'}
+              colorScheme='blue'
+              mr={3}
+              onClick={handleReply}
+              isLoading={isReplying}
+            >
+              Reply
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
       <Flex gap={2} alignItems={'center'}>
         <Text color='gray.light' fontSize='sm'>
