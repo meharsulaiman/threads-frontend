@@ -1,19 +1,41 @@
 import { Container } from '@chakra-ui/react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import UserPage from './pages/UserPage';
 import PostPage from './pages/PostPage';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import userAtom from './atoms/userAtom';
 import LogoutButton from './components/LogoutButton';
 import UpdateProfilePage from './pages/UpdateProfilePage';
 import CreatePost from './components/CreatePost';
+import { useEffect } from 'react';
 
 function App() {
-  const user = useRecoilValue(userAtom);
+  const [user, setUser] = useRecoilState(userAtom);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCurrentUSer = async () => {
+      const res = await fetch(
+        `/api/users/currentUserProfile/${user?.username}`
+      );
+      const data = await res.json();
+
+      if (res.status === 200) {
+        setUser(data);
+        localStorage.setItem('user-threads', JSON.stringify(data));
+      } else if (res.status === 401) {
+        setUser(null);
+        localStorage.removeItem('user-threads');
+        navigate('/auth');
+      }
+    };
+
+    getCurrentUSer();
+  }, [setUser, user?.username, navigate]);
 
   console.log(user);
   return (
