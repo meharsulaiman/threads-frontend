@@ -38,7 +38,7 @@ export default function LoginCard() {
     setLoading(true);
     try {
       const res = await fetch(
-        'https://vercel.com/meharsuleiman/threads-backend/api/users/login',
+        'https://threads-backend-zeta.vercel.app//api/users/login',
         {
           method: 'POST',
           headers: {

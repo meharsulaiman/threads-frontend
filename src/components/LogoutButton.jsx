@@ -10,7 +10,7 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       const res = await fetch(
-        'https://vercel.com/meharsuleiman/threads-backend/api/users/logout',
+        'https://threads-backend-zeta.vercel.app//api/users/logout',
         {
           method: 'POST',
           headers: {

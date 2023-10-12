@@ -37,7 +37,7 @@ const UserHeader = ({ user }) => {
     try {
       setUpdating(true);
       const res = await fetch(
-        `https://vercel.com/meharsuleiman/threads-backend/api/users/follow/${user._id}`,
+        `https://threads-backend-zeta.vercel.app//api/users/follow/${user._id}`,
         {
           method: 'POST',
           headers: {

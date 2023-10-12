@@ -42,7 +42,7 @@ export default function UserProfilePage() {
     setUpdating(true);
     try {
       const res = await fetch(
-        `https://vercel.com/meharsuleiman/threads-backend/api/users/update/${user._id}`,
+        `https://threads-backend-zeta.vercel.app//api/users/update/${user._id}`,
         {
           method: 'PUT',
           headers: {

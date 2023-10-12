@@ -13,7 +13,7 @@ export default function HomePage() {
       setLoading(true);
       try {
         const res = await fetch(
-          'https://vercel.com/meharsuleiman/threads-backend/api/posts/feed'
+          'https://threads-backend-zeta.vercel.app//api/posts/feed'
         );
         const data = await res.json();
 

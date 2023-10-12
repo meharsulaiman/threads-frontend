@@ -35,7 +35,7 @@ const PostPage = () => {
     const getPost = async () => {
       try {
         const res = await fetch(
-          `https://vercel.com/meharsuleiman/threads-backend/api/posts/${pid}`
+          `https://threads-backend-zeta.vercel.app//api/posts/${pid}`
         );
         const data = await res.json();
         if (data.error) {
@@ -68,7 +68,7 @@ const PostPage = () => {
       if (!window.confirm('Are you sure you want to delete this post?')) return;
 
       const res = await fetch(
-        `https://vercel.com/meharsuleiman/threads-backend/api/posts/${currentPost?._id}`,
+        `https://threads-backend-zeta.vercel.app//api/posts/${currentPost?._id}`,
         {
           method: 'DELETE',
           headers: {
