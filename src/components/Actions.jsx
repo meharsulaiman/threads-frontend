@@ -51,6 +51,7 @@ const Actions = ({ post }) => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
         }
       );
 
@@ -120,6 +121,7 @@ const Actions = ({ post }) => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify({ text: reply }),
         }
       );

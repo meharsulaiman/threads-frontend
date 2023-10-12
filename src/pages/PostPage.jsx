@@ -35,7 +35,11 @@ const PostPage = () => {
     const getPost = async () => {
       try {
         const res = await fetch(
-          `https://threads-backend-zeta.vercel.app/api/posts/${pid}`
+          `https://threads-backend-zeta.vercel.app/api/posts/${pid}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
         );
         const data = await res.json();
         if (data.error) {
@@ -74,6 +78,7 @@ const PostPage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
         }
       );
 

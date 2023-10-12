@@ -13,7 +13,11 @@ export default function HomePage() {
       setLoading(true);
       try {
         const res = await fetch(
-          'https://threads-backend-zeta.vercel.app/api/posts/feed'
+          'https://threads-backend-zeta.vercel.app/api/posts/feed',
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
         );
         const data = await res.json();
 

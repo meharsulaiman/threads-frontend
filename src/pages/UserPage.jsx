@@ -19,7 +19,11 @@ const UserPage = () => {
     const fetchUserPosts = async () => {
       try {
         const res = await fetch(
-          `https://threads-backend-zeta.vercel.app/api/posts/user/${username}`
+          `https://threads-backend-zeta.vercel.app/api/posts/user/${username}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
         );
         const data = await res.json();
 

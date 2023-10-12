@@ -20,7 +20,11 @@ const Post = ({ post, postedBy }) => {
     const getUser = async () => {
       try {
         const res = await fetch(
-          `https://threads-backend-zeta.vercel.app/api/users/profile/${postedBy}`
+          `https://threads-backend-zeta.vercel.app/api/users/profile/${postedBy}`,
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
         );
 
         const data = await res.json();
@@ -48,6 +52,7 @@ const Post = ({ post, postedBy }) => {
         `https://threads-backend-zeta.vercel.app/api/posts/${post._id}`,
         {
           method: 'DELETE',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
