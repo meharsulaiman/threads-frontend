@@ -9,7 +9,7 @@ export default defineConfig({
     proxy: {
       // Get rid of CORS errors
       '/api': {
-        target: 'https://threads-backend-zeta.vercel.app/',
+        target: 'https://threads-backend-zeta.vercel.app',
         changeOrigin: true,
         secure: false,
       },
