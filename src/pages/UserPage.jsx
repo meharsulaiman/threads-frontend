@@ -18,7 +18,9 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const res = await fetch(`/api/posts/user/${username}`);
+        const res = await fetch(
+          `https://vercel.com/meharsuleiman/threads-backend/api/posts/user/${username}`
+        );
         const data = await res.json();
 
         if (data.error) {

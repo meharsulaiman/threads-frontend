@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const getCurrentUSer = async () => {
       const res = await fetch(
-        `/api/users/currentUserProfile/${user?.username}`
+        `https://vercel.com/meharsuleiman/threads-backend/api/users/currentUserProfile/${user?.username}`
       );
       const data = await res.json();
 

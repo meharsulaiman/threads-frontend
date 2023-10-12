@@ -34,7 +34,9 @@ const PostPage = () => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const res = await fetch(`/api/posts/${pid}`);
+        const res = await fetch(
+          `https://vercel.com/meharsuleiman/threads-backend/api/posts/${pid}`
+        );
         const data = await res.json();
         if (data.error) {
           showToast('Error', data.error, 'error');
@@ -65,12 +67,15 @@ const PostPage = () => {
     try {
       if (!window.confirm('Are you sure you want to delete this post?')) return;
 
-      const res = await fetch(`/api/posts/${currentPost?._id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await fetch(
+        `https://vercel.com/meharsuleiman/threads-backend/api/posts/${currentPost?._id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const data = await res.json();
       if (data.error) {

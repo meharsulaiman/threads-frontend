@@ -36,12 +36,15 @@ const UserHeader = ({ user }) => {
     if (updating) return;
     try {
       setUpdating(true);
-      const res = await fetch(`/api/users/follow/${user._id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await fetch(
+        `https://vercel.com/meharsuleiman/threads-backend/api/users/follow/${user._id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const data = await res.json();
 
       if (data.error) {

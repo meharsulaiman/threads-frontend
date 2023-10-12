@@ -19,7 +19,9 @@ const Post = ({ post, postedBy }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(`/api/users/profile/${postedBy}`);
+        const res = await fetch(
+          `https://vercel.com/meharsuleiman/threads-backend/api/users/profile/${postedBy}`
+        );
 
         const data = await res.json();
         if (data.error) {
@@ -42,12 +44,15 @@ const Post = ({ post, postedBy }) => {
     try {
       if (!window.confirm('Are you sure you want to delete this post?')) return;
 
-      const res = await fetch(`/api/posts/${post._id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await fetch(
+        `https://vercel.com/meharsuleiman/threads-backend/api/posts/${post._id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const data = await res.json();
       if (data.error) {

@@ -11,7 +11,9 @@ const useGetUserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`/api/users/profile/${username}`);
+        const res = await fetch(
+          `https://vercel.com/meharsuleiman/threads-backend/api/users/profile/${username}`
+        );
         const data = await res.json();
 
         if (data.error) {

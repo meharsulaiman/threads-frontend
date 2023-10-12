@@ -44,12 +44,15 @@ const Actions = ({ post }) => {
     if (isLiking) return;
     setIsLiking(true);
     try {
-      const res = await fetch(`/api/posts/like/${post._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await fetch(
+        `https://vercel.com/meharsuleiman/threads-backend/api/posts/like/${post._id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const data = await res.json();
 
@@ -110,13 +113,16 @@ const Actions = ({ post }) => {
     setIsReplying(true);
 
     try {
-      const res = await fetch(`/api/posts/reply/${post._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: reply }),
-      });
+      const res = await fetch(
+        `https://vercel.com/meharsuleiman/threads-backend/api/posts/reply/${post._id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ text: reply }),
+        }
+      );
 
       const data = await res.json();
 
