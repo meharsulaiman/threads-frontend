@@ -22,8 +22,9 @@ import { useRef, useState } from 'react';
 import usePreviewImg from '../hooks/usePreviewImg';
 import { BsFillImageFill } from 'react-icons/bs';
 import userAtom from '../atoms/userAtom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import useShowToast from '../hooks/useShowToast';
+import postAtom from '../atoms/postsAtom';
 
 const MAX_POST_LENGTH = 500;
 
@@ -36,6 +37,7 @@ const CreatePost = () => {
   const imageRef = useRef(null);
   const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
   const showToast = useShowToast();
+  const [posts, setPosts] = useRecoilState(postAtom);
 
   const handlePostText = (e) => {
     const inputText = e.target.value;
@@ -73,6 +75,7 @@ const CreatePost = () => {
       }
       showToast('Post created', 'Your post created successfully', 'success');
       console.log(data);
+      setPosts([data.post, ...posts]);
       onClose();
       setImgUrl('');
       setPostText('');
