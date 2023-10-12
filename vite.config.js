@@ -10,7 +10,7 @@ export default defineConfig({
       // Get rid of CORS errors
       '/api': {
         target: 'https://threads-backend-zeta.vercel.app',
-        changeOrigin: true,
+        // changeOrigin: true,
         secure: false,
       },
     },
