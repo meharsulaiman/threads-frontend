@@ -12,7 +12,9 @@ export default function HomePage() {
     const getFeedPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch('/api/posts/feed');
+        const res = await fetch(
+          'https://vercel.com/meharsuleiman/threads-backend/api/posts/feed'
+        );
         const data = await res.json();
 
         if (data.error) {

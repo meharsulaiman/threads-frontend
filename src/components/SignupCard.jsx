@@ -35,13 +35,16 @@ export default function SignupCard() {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch('/api/users/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(inputs),
-      });
+      const res = await fetch(
+        'https://vercel.com/meharsuleiman/threads-backend/api/users/signup',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(inputs),
+        }
+      );
       const data = await res.json();
 
       if (data.error) {
