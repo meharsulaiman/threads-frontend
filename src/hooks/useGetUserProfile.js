@@ -12,7 +12,7 @@ const useGetUserProfile = () => {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          `https://threads-backend-zeta.vercel.app//api/users/profile/${username}`
+          `https://threads-backend-zeta.vercel.app/api/users/profile/${username}`
         );
         const data = await res.json();
 

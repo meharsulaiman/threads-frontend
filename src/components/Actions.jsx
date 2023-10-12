@@ -45,7 +45,7 @@ const Actions = ({ post }) => {
     setIsLiking(true);
     try {
       const res = await fetch(
-        `https://threads-backend-zeta.vercel.app//api/posts/like/${post._id}`,
+        `https://threads-backend-zeta.vercel.app/api/posts/like/${post._id}`,
         {
           method: 'PUT',
           headers: {
@@ -114,7 +114,7 @@ const Actions = ({ post }) => {
 
     try {
       const res = await fetch(
-        `https://threads-backend-zeta.vercel.app//api/posts/reply/${post._id}`,
+        `https://threads-backend-zeta.vercel.app/api/posts/reply/${post._id}`,
         {
           method: 'PUT',
           headers: {

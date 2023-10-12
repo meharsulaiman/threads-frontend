@@ -56,7 +56,7 @@ const CreatePost = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        'https://threads-backend-zeta.vercel.app/api/posts/create',
+        'https://threads-backend-zeta.vercel.appapi/posts/create',
         {
           method: 'POST',
           headers: {

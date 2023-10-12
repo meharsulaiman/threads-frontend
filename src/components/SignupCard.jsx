@@ -36,7 +36,7 @@ export default function SignupCard() {
   const handleSignup = async () => {
     try {
       const res = await fetch(
-        'https://threads-backend-zeta.vercel.app//api/users/signup',
+        'https://threads-backend-zeta.vercel.app/api/users/signup',
         {
           method: 'POST',
           headers: {
